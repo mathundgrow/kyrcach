@@ -1,0 +1,78 @@
+! изучены следующие файлы:
+```
+lib/
+├── main.dart                       # точка входа: настройки, контроллеры, MultiProvider
+├── app/
+│   ├── app.dart                    # MaterialApp, тема
+│   ├── workspace_page.dart         # композиция экрана
+│   ├── theme/                      # ThemeData и палитра слоёв
+│   └── widgets/                    # top bar, диалоги
+├── core/
+│   ├── error/app_failure.dart      # единый тип ошибки приложения
+│   ├── project_picker.dart         # выбор каталога
+│   ├── theme/app_colors.dart       # общая палитра
+│   ├── utils/formatters.dart       # форматирование путей, чисел, времени
+│   └── widgets/                    # переиспользуемые панели, hover, бейджи
+└── features/
+    ├── project_scan/               # сканирование и граф
+    │   ├── dart_project_scanner.dart  # сканер в Isolate, парсер импортов
+    │   ├── layer_classifier.dart      # классификация слоёв
+    │   ├── project_graph.dart         # SourceFile, DependencyEdge, ProjectGraph
+    │   ├── workspace_controller.dart  # статус сканирования, граф + анализ
+    │   └── *.dart                     # sidebar, empty/error/scanning views
+    ├── analysis/                   # поиск аномалий
+    │   ├── architecture_analyzer.dart # циклы (Tarjan), нарушения слоёв, связанность
+    │   └── architecture_issue.dart    # ArchitectureIssue, GraphAnalysis, метрики
+    ├── graph/                      # интерактивный граф
+    │   ├── graph_controller.dart      # выбор, фильтры, solo-слой, проверенные аномалии
+    │   ├── layered_layout.dart        # детерминированная слоёная раскладка
+    │   └── graph_canvas.dart          # InteractiveViewer + CustomPaint
+    ├── inspector/                  # локальный ИИ
+    │   ├── ai_inspector.dart          # Ollama + офлайн-фолбэк
+    │   ├── ollama_api.dart            # HTTP-обёртка над Ollama
+    │   ├── inspection_request.dart    # промпт без исходного кода
+    │   └── inspector_panel.dart       # панель файла, диагностика
+    ├── search/                     # локальный поиск по графу
+    └── settings/                   # настройки Ollama (SharedPreferences)
+
+test/
+├── helpers/graph_factory.dart
+└── features/
+    ├── analysis/architecture_analyzer_test.dart
+    ├── inspector/diagnosis_response_parser_test.dart
+    ├── project_scan/dart_project_scanner_test.dart
+    ├── project_scan/import_directive_parser_test.dart
+    ├── graph/layered_layout_test.dart
+    ├── graph/viewport_clamp_test.dart
+    ├── graph/graph_isolated_nodes_test.dart
+    ├── graph/graph_pan_clamp_test.dart
+    └── search/search_graph_test.dart
+```
+
+
+
+
+
+1. Что мы будем хранить в базе данных (SQLite)?
+Под наши задачи (сохранение результатов и кэш) идеально подходят три таблицы:
+
+Таблица файлов (files) — метаданные каждого просканированного файла: уникальный ID, имя, относительный и абсолютный пути, архитектурный слой (Presentation, Domain, Data и т.д.) и количество строк.
+
+Таблица связей ребер (edges) — импорты между файлами: ID связи, ID файла-отправителя (from_id) и ID файла-получателя (to_id), чтобы граф собирался из базы мгновенно без повторного сканирования.
+
+Таблица кэша ИИ-отчетов (ai_cache) — результаты диагностики от Ollama: путь файла или его хэш, статус ответа и сам текст рекомендаций. Это избавит от необходимости дергать локальную нейросеть повторно для тех же файлов.
+
+
+
+2. С какой папки лучше всего начать читать весь проект?
+Начинать нужно строго снизу вверх, по порядку логики приложения:
+
+lib/features/project_scan/ — Старт. Здесь находится dart_project_scanner.dart (обход папок и изоляты) и import_directive_parser.dart (регулярки для поиска импортов). Поняв это, ты поймешь, как проект вообще получает данные о коде.
+
+lib/features/analysis/ — Логика. Файл architecture_analyzer.dart (поиск циклов алгоритмом Тарьяна и проверка нарушений слоев). Здесь происходит вся математика графа.
+
+lib/features/graph/ — Визуализация. layered_layout.dart (как расставляются карточки) и graph_canvas.dart (сам холст с InteractiveViewer и CustomPaint).
+
+lib/features/inspector/ — ИИ. Общение с Ollama и офлайн-фолбэк.
+
+lib/app/ и lib/main.dart — Сборка. Точка входа, где всё это связывается воедино через Provider.
