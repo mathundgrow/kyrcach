@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:codegraph/core/error/app_failure.dart';
 import 'package:codegraph/features/analysis/architecture_analyzer.dart';
 import 'package:codegraph/features/analysis/graph_analysis.dart';
-import 'package:codegraph/features/project_scan/dart_project_scanner.dart';
-import 'package:codegraph/features/project_scan/project_graph.dart';
+import 'package:codegraph/features/project_scan/services/dart_project_scanner.dart';
+import 'package:codegraph/features/project_scan/models/project_graph.dart';
 
 enum WorkspaceStatus { empty, scanning, ready, failure }
 

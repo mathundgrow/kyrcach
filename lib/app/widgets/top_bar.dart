@@ -6,8 +6,8 @@ import 'package:codegraph/core/utils/formatters.dart';
 import 'package:codegraph/core/widgets/code_graph_mark.dart';
 import 'package:codegraph/core/widgets/hover_builder.dart';
 import 'package:codegraph/features/inspector/ai_status_pill.dart';
-import 'package:codegraph/features/project_scan/project_graph.dart';
-import 'package:codegraph/features/project_scan/workspace_controller.dart';
+import 'package:codegraph/features/project_scan/models/project_graph.dart';
+import 'package:codegraph/features/project_scan/widgets/workspace_controller.dart';
 import 'package:codegraph/features/search/search_box.dart';
 
 /// Верхняя панель: выбранный проект слева, поиск по центру,

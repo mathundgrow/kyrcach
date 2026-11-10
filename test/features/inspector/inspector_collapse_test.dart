@@ -6,7 +6,7 @@ import 'package:codegraph/features/inspector/inspector_controller.dart';
 import 'package:codegraph/features/inspector/inspector_collapse_tab.dart';
 import 'package:codegraph/features/inspector/inspector_panel.dart';
 import 'package:codegraph/features/inspector/ollama_api.dart';
-import 'package:codegraph/features/project_scan/workspace_controller.dart';
+import 'package:codegraph/features/project_scan/widgets/workspace_controller.dart';
 import 'package:codegraph/features/settings/ai_settings.dart';
 import 'package:codegraph/features/settings/settings_controller.dart';
 import 'package:flutter/material.dart';

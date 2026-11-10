@@ -1,7 +1,7 @@
-import 'package:codegraph/features/project_scan/architecture_layer.dart';
-import 'package:codegraph/features/project_scan/dependency_edge.dart';
-import 'package:codegraph/features/project_scan/project_graph.dart';
-import 'package:codegraph/features/project_scan/source_file.dart';
+import 'package:codegraph/features/project_scan/models/architecture_layer.dart';
+import 'package:codegraph/features/project_scan/models/dependency_edge.dart';
+import 'package:codegraph/features/project_scan/models/project_graph.dart';
+import 'package:codegraph/features/project_scan/models/source_file.dart';
 
 SourceFile testFile(String id, {ArchitectureLayer? layer, int lineCount = 10}) {
   final name = id.split('/').last;

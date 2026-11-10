@@ -7,9 +7,9 @@ import 'package:codegraph/features/inspector/ai_inspector.dart';
 import 'package:codegraph/features/inspector/ai_status.dart';
 import 'package:codegraph/features/inspector/inspection_request.dart';
 import 'package:codegraph/features/inspector/ollama_api.dart';
-import 'package:codegraph/features/project_scan/project_graph.dart';
-import 'package:codegraph/features/project_scan/source_file.dart';
-import 'package:codegraph/features/project_scan/workspace_controller.dart';
+import 'package:codegraph/features/project_scan/models/project_graph.dart';
+import 'package:codegraph/features/project_scan/models/source_file.dart';
+import 'package:codegraph/features/project_scan/widgets/workspace_controller.dart';
 import 'package:codegraph/features/settings/ai_settings.dart';
 
 enum AiConnection { checking, online, offline }

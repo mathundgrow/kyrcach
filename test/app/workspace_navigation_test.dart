@@ -5,7 +5,7 @@ import 'package:codegraph/app/workspace_page.dart';
 import 'package:codegraph/features/graph/graph_controller.dart';
 import 'package:codegraph/features/inspector/inspector_controller.dart';
 import 'package:codegraph/features/inspector/ollama_api.dart';
-import 'package:codegraph/features/project_scan/workspace_controller.dart';
+import 'package:codegraph/features/project_scan/widgets/workspace_controller.dart';
 import 'package:codegraph/features/search/search_graph.dart';
 import 'package:codegraph/features/settings/ai_settings.dart';
 import 'package:codegraph/features/settings/settings_controller.dart';

@@ -1,5 +1,5 @@
-import 'package:codegraph/features/project_scan/import_directive_parser.dart';
-import 'package:codegraph/features/project_scan/dependency_edge.dart';
+import 'package:codegraph/features/project_scan/services/import_directive_parser.dart';
+import 'package:codegraph/features/project_scan/models/dependency_edge.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -7,7 +7,7 @@ import 'package:codegraph/core/widgets/app_panel.dart';
 import 'package:codegraph/core/widgets/hover_builder.dart';
 import 'package:codegraph/core/widgets/section_label.dart';
 import 'package:codegraph/features/graph/graph_controller.dart';
-import 'package:codegraph/features/project_scan/source_file.dart';
+import 'package:codegraph/features/project_scan/models/source_file.dart';
 
 /// Список зависимостей файла: направление задаёт акцентный цвет.
 ///

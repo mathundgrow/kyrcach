@@ -5,7 +5,7 @@ import 'package:codegraph/core/theme/app_colors.dart';
 import 'package:codegraph/app/theme/layer_palette.dart';
 import 'package:codegraph/core/utils/formatters.dart';
 import 'package:codegraph/features/analysis/architecture_issue.dart';
-import 'package:codegraph/features/project_scan/source_file.dart';
+import 'package:codegraph/features/project_scan/models/source_file.dart';
 import 'package:codegraph/features/graph/graph_controller.dart';
 
 class GraphNodeCard extends StatefulWidget {

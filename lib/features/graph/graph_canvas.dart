@@ -5,7 +5,7 @@ import 'package:codegraph/app/theme/layer_palette.dart';
 import 'package:codegraph/core/theme/app_colors.dart';
 import 'package:codegraph/core/widgets/app_panel.dart';
 import 'package:codegraph/core/widgets/dot_grid_background.dart';
-import 'package:codegraph/features/project_scan/architecture_layer.dart';
+import 'package:codegraph/features/project_scan/models/architecture_layer.dart';
 import 'package:codegraph/features/graph/graph_controller.dart';
 import 'package:codegraph/features/graph/layered_layout.dart';
 import 'graph_node_card.dart';

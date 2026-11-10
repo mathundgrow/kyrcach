@@ -1,5 +1,5 @@
 import 'package:codegraph/features/analysis/architecture_analyzer.dart';
-import 'package:codegraph/features/project_scan/architecture_layer.dart';
+import 'package:codegraph/features/project_scan/models/architecture_layer.dart';
 import 'package:codegraph/features/search/search_graph.dart';
 import 'package:flutter_test/flutter_test.dart';
 

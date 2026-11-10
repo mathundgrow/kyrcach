@@ -1,4 +1,4 @@
-import 'package:codegraph/features/project_scan/architecture_layer.dart';
+import 'package:codegraph/features/project_scan/models/architecture_layer.dart';
 
 class ProjectMetrics {
   const ProjectMetrics({

@@ -4,10 +4,10 @@ import 'dart:isolate';
 import 'package:path/path.dart' as p;
 
 import 'package:codegraph/core/error/app_failure.dart';
-import 'architecture_layer.dart';
-import 'dependency_edge.dart';
-import 'project_graph.dart';
-import 'source_file.dart';
+import '../models/architecture_layer.dart';
+import '../models/dependency_edge.dart';
+import '../models/project_graph.dart';
+import '../models/source_file.dart';
 import 'layer_classifier.dart';
 import 'import_directive_parser.dart';
 

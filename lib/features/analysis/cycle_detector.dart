@@ -1,4 +1,4 @@
-import 'package:codegraph/features/project_scan/project_graph.dart';
+import 'package:codegraph/features/project_scan/models/project_graph.dart';
 import 'package:codegraph/features/analysis/dependency_cycle.dart';
 
 /// Поиск сильно связанных компонент алгоритмом Тарьяна.

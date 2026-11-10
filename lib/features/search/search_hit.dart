@@ -1,4 +1,4 @@
-import 'package:codegraph/features/project_scan/source_file.dart';
+import 'package:codegraph/features/project_scan/models/source_file.dart';
 
 class SearchHit {
   const SearchHit({

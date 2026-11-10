@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:codegraph/features/analysis/architecture_issue.dart';
 import 'package:codegraph/features/analysis/architecture_analyzer.dart';
 import 'package:codegraph/core/error/app_failure.dart';
-import 'package:codegraph/features/project_scan/dart_project_scanner.dart';
-import 'package:codegraph/features/project_scan/architecture_layer.dart';
+import 'package:codegraph/features/project_scan/services/dart_project_scanner.dart';
+import 'package:codegraph/features/project_scan/models/architecture_layer.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as p;
 

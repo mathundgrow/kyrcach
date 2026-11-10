@@ -1,7 +1,7 @@
 import 'package:codegraph/features/analysis/architecture_issue.dart';
 import 'package:codegraph/features/analysis/graph_analysis.dart';
-import 'package:codegraph/features/project_scan/architecture_layer.dart';
-import 'package:codegraph/features/project_scan/project_graph.dart';
+import 'package:codegraph/features/project_scan/models/architecture_layer.dart';
+import 'package:codegraph/features/project_scan/models/project_graph.dart';
 import 'package:codegraph/features/search/search_hit.dart';
 
 /// Локальный поиск по файлам, путям, слоям и найденным аномалиям.

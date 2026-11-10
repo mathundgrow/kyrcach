@@ -1,9 +1,9 @@
-import 'package:codegraph/features/project_scan/architecture_layer.dart';
+import 'package:codegraph/features/project_scan/models/architecture_layer.dart';
 
-/// Определяет архитектурный слой по сегментам пути файла.
+/// Определяет архитектурный слой по сегментам пути файла
 ///
 /// Правила намеренно детерминированы: один и тот же путь всегда даёт один
-/// и тот же слой, поэтому анализ воспроизводим и не зависит от LLM.
+/// и тот же слой, поэтому анализ воспроизводим и не зависит от LLM
 class LayerClassifier {
   const LayerClassifier();
 
@@ -83,7 +83,10 @@ class LayerClassifier {
       if (layer != null) return layer;
     }
 
+    /// берет самый последний элемент из списка (это имя файла без папок) и отрезает расширение
+    /// lib/main.dart -> "main"
     final fileName = segments.last.replaceAll('.dart', '');
+
     if (fileName == 'main' || fileName == 'bootstrap') {
       return ArchitectureLayer.application;
     }

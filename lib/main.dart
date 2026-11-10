@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:codegraph/app/app.dart';
 import 'package:codegraph/features/graph/graph_controller.dart';
 import 'package:codegraph/features/inspector/inspector_controller.dart';
-import 'package:codegraph/features/project_scan/workspace_controller.dart';
+import 'package:codegraph/features/project_scan/widgets/workspace_controller.dart';
 import 'package:codegraph/features/search/search_graph.dart';
 import 'package:codegraph/features/settings/settings_controller.dart';
 

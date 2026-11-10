@@ -1,5 +1,6 @@
-import 'package:codegraph/features/project_scan/dependency_edge.dart';
+import 'package:codegraph/features/project_scan/models/dependency_edge.dart';
 
+/// Класс-контейнер - Простая структура данных, сохраняет то, что нашли
 class ParsedDirective {
   const ParsedDirective({required this.uri, required this.directive});
 
@@ -7,10 +8,10 @@ class ParsedDirective {
   final ImportDirective directive;
 }
 
-/// Извлекает директивы import/export из исходника Dart.
+/// Извлекает директивы import/export из исходника Dart
 ///
 /// Регулярное выражение намеренно не пытается быть полноценным парсером Dart:
-/// для архитектурного анализа достаточно строк, начинающихся с import/export.
+/// для архитектурного анализа достаточно строк, начинающихся с import/export
 class ImportDirectiveParser {
   const ImportDirectiveParser();
 

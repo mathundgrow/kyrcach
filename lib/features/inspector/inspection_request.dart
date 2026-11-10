@@ -1,7 +1,7 @@
 import 'package:codegraph/features/analysis/architecture_issue.dart';
 import 'package:codegraph/features/analysis/graph_analysis.dart';
-import 'package:codegraph/features/project_scan/project_graph.dart';
-import 'package:codegraph/features/project_scan/source_file.dart';
+import 'package:codegraph/features/project_scan/models/project_graph.dart';
+import 'package:codegraph/features/project_scan/models/source_file.dart';
 
 /// Снимок файла для ИИ-диагностики: связи, слой и найденные аномалии.
 /// В промпт не попадает исходный код — только эта метаинформация.

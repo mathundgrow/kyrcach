@@ -7,7 +7,7 @@ import 'package:codegraph/core/widgets/hover_builder.dart';
 import 'package:codegraph/features/analysis/architecture_issue.dart';
 import 'package:codegraph/features/analysis/issue_palette.dart';
 import 'package:codegraph/features/graph/graph_controller.dart';
-import 'package:codegraph/features/project_scan/architecture_layer.dart';
+import 'package:codegraph/features/project_scan/models/architecture_layer.dart';
 
 class ProjectSidebar extends StatefulWidget {
   const ProjectSidebar({super.key, this.width = 292});

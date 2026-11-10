@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:codegraph/features/project_scan/architecture_layer.dart';
+import 'package:codegraph/features/project_scan/models/architecture_layer.dart';
 import 'package:codegraph/core/theme/app_colors.dart';
 
 extension ArchitectureLayerPalette on ArchitectureLayer {

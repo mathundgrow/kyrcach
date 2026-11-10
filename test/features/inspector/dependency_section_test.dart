@@ -4,7 +4,7 @@ import 'package:codegraph/app/theme/app_theme.dart';
 import 'package:codegraph/core/theme/app_colors.dart';
 import 'package:codegraph/features/graph/graph_controller.dart';
 import 'package:codegraph/features/inspector/dependency_section.dart';
-import 'package:codegraph/features/project_scan/workspace_controller.dart';
+import 'package:codegraph/features/project_scan/widgets/workspace_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as p;
