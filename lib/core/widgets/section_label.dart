@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
 import 'package:codegraph/core/theme/app_colors.dart';
+import 'package:flutter/material.dart';
 
 class SectionLabel extends StatelessWidget {
   const SectionLabel({
@@ -43,7 +42,7 @@ class MiniBadge extends StatelessWidget {
   const MiniBadge({
     super.key,
     required this.label,
-    this.color = AppColors.textSecondary,
+    this.color = const Color.fromARGB(255, 167, 88, 174),
     this.background,
     this.icon,
     this.dense = false,
@@ -59,13 +58,12 @@ class MiniBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: dense ? 6 : 8,
+        horizontal: dense ? 6 : 12,
         vertical: dense ? 2.5 : 4,
       ),
       decoration: BoxDecoration(
-        color: background ?? color.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: color.withValues(alpha: 0.25)),
+        color: background ?? color.withValues(alpha: 0.15),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -111,13 +109,7 @@ class StatusDot extends StatelessWidget {
         color: color,
         shape: BoxShape.circle,
         boxShadow: glow
-            ? [
-                BoxShadow(
-                  color: color.withValues(alpha: 0.55),
-                  blurRadius: 8,
-                  spreadRadius: 1,
-                ),
-              ]
+            ? [BoxShadow(color: color.withValues(alpha: 0.55))]
             : null,
       ),
     );

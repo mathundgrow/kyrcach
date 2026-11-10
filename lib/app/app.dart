@@ -10,7 +10,7 @@ class CodeGraphApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'CodeGraph — архитектурный анализатор',
+      title: 'архитектурный анализатор',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.dark,
       home: const WorkspacePage(),

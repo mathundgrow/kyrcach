@@ -3,31 +3,31 @@ import 'package:flutter/material.dart';
 class AppColors {
   const AppColors._();
 
-  static const Color background = Color(0xFF0C0A06);
-  static const Color surface = Color(0xFF141007);
-  static const Color surfaceAlt = Color(0xFF1A150C);
-  static const Color surfaceRaised = Color(0xFF221B10);
-  static const Color surfaceHigh = Color(0xFF2A2114);
+  static const Color background = Color.fromARGB(255, 15, 13, 10);
+  static const Color surface = Color.fromARGB(255, 17, 14, 8);
+  static const Color surfaceAlt = Color.fromARGB(255, 31, 26, 17);
+  static const Color surfaceRaised = Color.fromARGB(255, 28, 23, 16);
+  static const Color surfaceHigh = Color.fromARGB(255, 44, 37, 26);
 
-  static const Color border = Color(0xFF342A17);
-  static const Color borderStrong = Color(0xFF4A3A1E);
+  static const Color border = Color.fromARGB(255, 53, 45, 31);
+  static const Color borderStrong = Color.fromARGB(255, 72, 55, 24);
 
-  static const Color primary = Color(0xFFF2C14E);
-  static const Color primaryBright = Color(0xFFFFD563);
-  static const Color primaryDim = Color(0xFFC79A2E);
-  static const Color primaryWash = Color(0xFF3A2C10);
+  static const Color primary = Color.fromARGB(255, 243, 204, 111);
+  static const Color primaryBright = Color.fromARGB(255, 253, 220, 129);
+  static const Color primaryDim = Color.fromARGB(255, 195, 160, 80);
+  static const Color primaryWash = Color.fromARGB(255, 62, 50, 26);
 
-  static const Color textPrimary = Color(0xFFF4EAD4);
-  static const Color textSecondary = Color(0xFFBCA982);
-  static const Color textMuted = Color(0xFF7E7052);
+  static const Color textPrimary = Color.fromARGB(255, 245, 238, 223);
+  static const Color textSecondary = Color.fromARGB(255, 190, 174, 141);
+  static const Color textMuted = Color.fromARGB(255, 132, 122, 99);
 
-  static const Color danger = Color(0xFFFF4D4F);
-  static const Color dangerWash = Color(0xFF3A1212);
-  static const Color warning = Color(0xFFF0A93B);
-  static const Color warningWash = Color(0xFF3A2A0D);
-  static const Color success = Color(0xFF9BCF6A);
-  static const Color successWash = Color(0xFF1E2A12);
-  static const Color info = Color(0xFF6FA8FF);
+  static const Color danger = Color.fromARGB(255, 188, 56, 58);
+  static const Color dangerWash = Color.fromARGB(255, 73, 25, 25);
+  static const Color warning = Color.fromARGB(255, 236, 159, 44);
+  static const Color warningWash = Color.fromARGB(255, 54, 40, 14);
+  static const Color success = Color.fromARGB(255, 132, 193, 75);
+  static const Color successWash = Color.fromARGB(255, 34, 44, 24);
+  static const Color info = Color.fromARGB(255, 74, 138, 235);
 
   /// Цвет предупреждений в аномалиях. Янтарный `warning` сливается с жёлтым
   /// интерфейсом, поэтому для проблем используется отдельный розово-красный.
@@ -44,7 +44,7 @@ class AppColors {
   static const LinearGradient amberGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [primaryBright, primary, Color(0xFFD79D22)],
+    colors: [primaryBright, bothEdge, Color.fromARGB(255, 141, 59, 182)],
   );
 
   static const LinearGradient panelGradient = LinearGradient(

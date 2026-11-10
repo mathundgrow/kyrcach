@@ -52,7 +52,7 @@ class HoverSurface extends StatelessWidget {
     this.padding = const EdgeInsets.all(12),
     this.radius = 12,
     this.selected = false,
-    this.accent = AppColors.primary,
+    this.accent = AppColors.bothEdge,
     this.tooltip,
   });
 

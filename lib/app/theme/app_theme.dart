@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
 import 'package:codegraph/core/theme/app_colors.dart';
+import 'package:flutter/material.dart';
 
 class AppTheme {
   const AppTheme._();
@@ -143,7 +142,7 @@ class AppTheme {
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: const WidgetStatePropertyAll(AppColors.primary),
+          backgroundColor: const WidgetStatePropertyAll(AppColors.bothEdge),
           foregroundColor: const WidgetStatePropertyAll(AppColors.background),
           overlayColor: WidgetStatePropertyAll(
             AppColors.background.withValues(alpha: 0.08),
@@ -163,12 +162,13 @@ class AppTheme {
           ),
         ),
       ),
+      
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
-          foregroundColor: const WidgetStatePropertyAll(AppColors.textPrimary),
+          foregroundColor: const WidgetStatePropertyAll(AppColors.bothEdge),
           backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
           side: const WidgetStatePropertyAll(
-            BorderSide(color: AppColors.borderStrong),
+            BorderSide(color: AppColors.bothEdge),
           ),
           padding: const WidgetStatePropertyAll(
             EdgeInsets.symmetric(horizontal: 16, vertical: 15),
@@ -181,10 +181,11 @@ class AppTheme {
             ),
           ),
           shape: WidgetStatePropertyAll(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           ),
         ),
       ),
+
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           foregroundColor: const WidgetStatePropertyAll(AppColors.primary),

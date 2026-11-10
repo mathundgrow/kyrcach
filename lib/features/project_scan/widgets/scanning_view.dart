@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:codegraph/core/theme/app_colors.dart';
 import 'package:codegraph/core/utils/formatters.dart';
 import 'package:codegraph/core/widgets/app_panel.dart';
-import 'package:codegraph/core/widgets/code_graph_mark.dart';
+
 import 'package:codegraph/core/widgets/dot_grid_background.dart';
 
 class ScanningView extends StatelessWidget {
@@ -31,7 +31,6 @@ class ScanningView extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const CodeGraphMark(size: 54),
                   const SizedBox(height: 22),
                   Text('Сканируем проект', style: textTheme.headlineSmall),
                   const SizedBox(height: 8),

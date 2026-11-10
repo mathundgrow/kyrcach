@@ -81,26 +81,34 @@ const List<String> _generatedSuffixes = [
   '.mocks.dart',
 ];
 
+/// сканирование проекта
 ProjectGraph _scanProjectSync(String inputPath) {
+
   final stopwatch = Stopwatch()..start();
+
   final root = Directory(inputPath);
+  /// если каталог не найден, выкидываем ошибку
   if (!root.existsSync()) {
     throw const AppFailure(
-      message: 'Каталог не найден. Проверьте путь и права доступа.',
+      message: 'Каталог не найден. Проверьте путь',
       code: FailureCode.notFound,
     );
   }
 
   final rootAbsolute = p.normalize(root.absolute.path);
+
   var projectRoot = rootAbsolute;
   var scanRoot = rootAbsolute;
   var scannedRoot = '.';
 
+  /// ищем папку lib там, куда пользователь нас закинет
   final libDirectory = Directory(p.join(rootAbsolute, 'lib'));
+  
+  /// нажал ли пользователь на корень проекта (где есть lib)
   if (libDirectory.existsSync()) {
     scanRoot = libDirectory.path;
     scannedRoot = 'lib';
-  } else if (p.basename(rootAbsolute) == 'lib') {
+  } else if (p.basename(rootAbsolute) == 'lib') { // или мы уже находимся в lib
     final parent = p.dirname(rootAbsolute);
     if (File(p.join(parent, 'pubspec.yaml')).existsSync()) {
       projectRoot = parent;
@@ -118,20 +126,31 @@ ProjectGraph _scanProjectSync(String inputPath) {
   final entities = Directory(
     scanRoot,
   ).listSync(recursive: true, followLinks: false);
+  
   for (final entity in entities) {
+    // если это не вложенная папка то пропускаем
     if (entity is! File) continue;
+    
+    // если файл не .dart, то мы его пропускаем
     if (!entity.path.toLowerCase().endsWith('.dart')) continue;
 
+    // вычисляет относительный путь файла от корня проекта 
+    // например, вемсто C:/Projects/MyApp/lib/features/home.dart получается lib/features/home.dart
     final relativeToRoot = p.relative(entity.path, from: projectRoot);
+
+    // приводим слеши к единому стандарту
     final id = _toPosix(relativeToRoot);
+    // отсекает мусорные пути
     if (_isExcluded(id)) continue;
 
     final name = p.basename(entity.path);
+    // также отсекает файлы вроде .g.dart
     if (_generatedSuffixes.any(name.endsWith)) {
       ignoredFiles++;
       continue;
     }
 
+    // чистый относительный путь пытаемся прочитать, если не получается - пропускаем
     String source;
     try {
       source = entity.readAsStringSync();
@@ -139,7 +158,8 @@ ProjectGraph _scanProjectSync(String inputPath) {
       ignoredFiles++;
       continue;
     }
-
+    
+    // добавляем в массив готовый объект _ScannedFile 
     scannedFiles.add(
       _ScannedFile(
         absolutePath: p.normalize(entity.path),
@@ -166,11 +186,14 @@ ProjectGraph _scanProjectSync(String inputPath) {
         packageName: projectName,
         knownIds: knownIds,
       );
+      // Если файл не найден — пропускаем
       if (targetId == null) continue;
 
+      // Формируется строка-ключ 'откуда|куда'. Если такая связка уже записана в edgeKeys, метод add вернет false, и дубликат будет пропущен
       final key = '${file.id}|$targetId';
       if (!edgeKeys.add(key)) continue;
 
+      // Если всё ок, создается объект связи, куда записывается направление (fromId -> toId), оригинальный путь и тип импорта (package или local).
       edges.add(
         DependencyEdge(
           fromId: file.id,
@@ -184,12 +207,14 @@ ProjectGraph _scanProjectSync(String inputPath) {
       );
     }
   }
-
+  
+  // соритровка ребер 
   edges.sort((a, b) {
     final bySource = a.fromId.compareTo(b.fromId);
     return bySource != 0 ? bySource : a.toId.compareTo(b.toId);
   });
-
+  
+  // Останавливается секундомер (stopwatch), чтобы замерить, за сколько миллисекунд отработал сканер
   stopwatch.stop();
 
   return ProjectGraph.create(

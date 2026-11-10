@@ -1,14 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'package:codegraph/core/theme/app_colors.dart';
 import 'package:codegraph/core/utils/formatters.dart';
-import 'package:codegraph/core/widgets/code_graph_mark.dart';
 import 'package:codegraph/core/widgets/hover_builder.dart';
 import 'package:codegraph/features/inspector/ai_status_pill.dart';
 import 'package:codegraph/features/project_scan/models/project_graph.dart';
 import 'package:codegraph/features/project_scan/widgets/workspace_controller.dart';
 import 'package:codegraph/features/search/search_box.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 /// Верхняя панель: выбранный проект слева, поиск по центру,
 /// название приложения с логотипом справа.
@@ -62,31 +60,14 @@ class TopBar extends StatelessWidget {
                 ),
               // Поиск — ровно по центру окна.
               if (graph != null) Center(child: SearchBox(width: searchWidth)),
-              // Справа — статус ИИ, настройки и название приложения.
+              // Справа — статус ИИ
               Align(
                 alignment: Alignment.centerRight,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     AiStatusPill(onTap: onOpenSettings),
-                    const SizedBox(width: 8),
-                    IconButton(
-                      onPressed: onOpenSettings,
-                      icon: const Icon(Icons.settings_outlined, size: 18),
-                      tooltip: 'Настройки ИИ',
-                    ),
                     const SizedBox(width: 10),
-                    Container(width: 1, height: 30, color: AppColors.border),
-                    const SizedBox(width: 14),
-                    Text(
-                      'CodeGraph',
-                      style: textTheme.titleMedium?.copyWith(
-                        fontSize: 17,
-                        letterSpacing: -0.2,
-                      ),
-                    ),
-                    const SizedBox(width: 11),
-                    const CodeGraphMark(size: 34),
                   ],
                 ),
               ),
@@ -123,7 +104,7 @@ class _ProjectChip extends StatelessWidget {
           const Icon(
             Icons.folder_open_rounded,
             size: 16,
-            color: AppColors.primaryDim,
+            color: AppColors.bothEdge,
           ),
           const SizedBox(width: 8),
           Flexible(
