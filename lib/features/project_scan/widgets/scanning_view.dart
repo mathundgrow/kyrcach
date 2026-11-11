@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
-
 import 'package:codegraph/core/theme/app_colors.dart';
 import 'package:codegraph/core/utils/formatters.dart';
 import 'package:codegraph/core/widgets/app_panel.dart';
-
 import 'package:codegraph/core/widgets/dot_grid_background.dart';
+import 'package:flutter/material.dart';
 
 class ScanningView extends StatelessWidget {
   const ScanningView({super.key, required this.path, required this.onCancel});
@@ -25,14 +23,20 @@ class ScanningView extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 560),
             child: AppPanel(
               padding: const EdgeInsets.all(32),
-              gradient: AppColors.panelGradient,
-              borderColor: AppColors.borderStrong,
+              // Вместо градиента — сплошной цвет с прозрачностью
+              color: AppColors.bothEdge.withValues(alpha: 0.08),
+              borderColor: AppColors.bothEdge,
               radius: 20,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const SizedBox(height: 22),
-                  Text('Сканируем проект', style: textTheme.headlineSmall),
+                  Text(
+                    'Сканируем проект',
+                    style: textTheme.headlineSmall?.copyWith(
+                      color: AppColors.bothEdge,
+                    ),
+                  ),
                   const SizedBox(height: 8),
                   Text(
                     path == null
@@ -41,33 +45,38 @@ class ScanningView extends StatelessWidget {
                     textAlign: TextAlign.center,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: textTheme.bodySmall,
+                    style: textTheme.bodySmall?.copyWith(
+                      color: AppColors.bothEdge.withValues(alpha: 0.7),
+                    ),
                   ),
                   const SizedBox(height: 24),
-                  const ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    child: LinearProgressIndicator(minHeight: 3),
+                  ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(4)),
+                    child: LinearProgressIndicator(
+                      minHeight: 3,
+                      color: AppColors.bothEdge,
+                      backgroundColor: AppColors.bothEdge.withValues(alpha: 0.2),
+                    ),
                   ),
                   const SizedBox(height: 22),
                   const _ScanStep(
-                    icon: Icons.folder_open_outlined,
-                    text:
-                        'Обходим .dart-файлы и читаем директивы import/export',
+                    text: 'Обходим .dart-файлы и читаем директивы import/export',
                   ),
                   const SizedBox(height: 10),
                   const _ScanStep(
-                    icon: Icons.hub_outlined,
                     text: 'Сопоставляем пути и строим направленный граф',
                   ),
                   const SizedBox(height: 10),
                   const _ScanStep(
-                    icon: Icons.troubleshoot_outlined,
                     text: 'Ищем циклы, мёртвый код и нарушения слоёв',
                   ),
                   if (onCancel != null) ...[
                     const SizedBox(height: 22),
                     TextButton(
                       onPressed: onCancel,
+                      style: TextButton.styleFrom(
+                        foregroundColor: AppColors.bothEdge,
+                      ),
                       child: const Text('Отменить'),
                     ),
                   ],
@@ -82,31 +91,21 @@ class ScanningView extends StatelessWidget {
 }
 
 class _ScanStep extends StatelessWidget {
-  const _ScanStep({required this.icon, required this.text});
+  const _ScanStep({required this.text});
 
-  final IconData icon;
   final String text;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          width: 26,
-          height: 26,
-          decoration: BoxDecoration(
-            color: AppColors.primary.withValues(alpha: 0.08),
-            borderRadius: BorderRadius.circular(7),
-          ),
-          child: Icon(icon, size: 13, color: AppColors.primaryDim),
-        ),
-        const SizedBox(width: 10),
+        // Убрали иконку, оставили только текст
         Expanded(
           child: Text(
             text,
-            style: Theme.of(
-              context,
-            ).textTheme.labelSmall?.copyWith(color: AppColors.textSecondary),
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  color: AppColors.bothEdge.withValues(alpha: 0.8),
+                ),
           ),
         ),
       ],

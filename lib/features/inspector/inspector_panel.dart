@@ -1,10 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-
-import 'package:codegraph/core/theme/app_colors.dart';
 import 'package:codegraph/app/theme/layer_palette.dart';
 import 'package:codegraph/core/error/app_failure.dart';
+import 'package:codegraph/core/theme/app_colors.dart';
 import 'package:codegraph/core/utils/formatters.dart';
 import 'package:codegraph/core/widgets/hover_builder.dart';
 import 'package:codegraph/core/widgets/section_label.dart';
@@ -12,12 +8,16 @@ import 'package:codegraph/features/analysis/architecture_issue.dart';
 import 'package:codegraph/features/analysis/graph_analysis.dart';
 import 'package:codegraph/features/analysis/issue_palette.dart';
 import 'package:codegraph/features/graph/graph_controller.dart';
+import 'package:codegraph/features/inspector/ai_diagnosis.dart';
+import 'package:codegraph/features/inspector/inspector_controller.dart';
 import 'package:codegraph/features/project_scan/models/project_graph.dart';
 import 'package:codegraph/features/project_scan/models/source_file.dart';
 import 'package:codegraph/features/settings/ai_settings.dart';
 import 'package:codegraph/features/settings/settings_controller.dart';
-import 'package:codegraph/features/inspector/ai_diagnosis.dart';
-import 'package:codegraph/features/inspector/inspector_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+
 import 'dependency_section.dart';
 
 class InspectorPanel extends StatelessWidget {
@@ -43,8 +43,6 @@ class InspectorPanel extends StatelessWidget {
       ),
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 180),
-        // По умолчанию AnimatedSwitcher центрирует ребёнка по вертикали —
-        // из-за этого над названием файла появлялся большой пустой отступ.
         layoutBuilder: (currentChild, previousChildren) => Stack(
           fit: StackFit.expand,
           alignment: Alignment.topCenter,
@@ -65,9 +63,6 @@ class InspectorPanel extends StatelessWidget {
 }
 
 /// Свёрнутый инспектор: узкая полоса вдоль правой границы.
-///
-/// Развернуть панель можно плавающим язычком [InspectorCollapseTab] на её
-/// левой границе — отдельная кнопка внутри полосы не нужна.
 class InspectorRail extends StatelessWidget {
   const InspectorRail({super.key});
 
@@ -94,98 +89,39 @@ class _EmptyInspector extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          const SizedBox(height: 18),
-          Container(
-            width: 66,
-            height: 66,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.primary.withValues(alpha: 0.07),
-              border: Border.all(
-                color: AppColors.primary.withValues(alpha: 0.18),
-              ),
+          // Верхняя иконка удалена, начинаем сразу с отступа
+          const SizedBox(height: 48),
+
+          Text(
+            'Выберите узел графа',
+            style: textTheme.titleMedium?.copyWith(
+              color: AppColors.bothEdge, // акцентный цвет
+              fontWeight: FontWeight.bold,
             ),
-            child: const Icon(
-              Icons.ads_click_rounded,
-              size: 26,
-              color: AppColors.primaryDim,
-            ),
+            textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 18),
-          Text('Выберите узел графа', style: textTheme.titleMedium),
-          const SizedBox(height: 7),
+          const SizedBox(height: 12),
+
           Text(
             'Кликните по карточке файла, чтобы увидеть его слой, '
             'входящие и исходящие зависимости и запустить локальную диагностику.',
             textAlign: TextAlign.center,
-            style: textTheme.bodySmall,
-          ),
-          const SizedBox(height: 24),
-          const _HintRow(
-            icon: Icons.touch_app_outlined,
-            text: 'Клик по узлу открывает карточку файла',
-          ),
-          const _HintRow(
-            icon: Icons.search_rounded,
-            text: 'Поиск находит файл по имени, пути или слою',
-          ),
-          const _HintRow(
-            icon: Icons.filter_alt_outlined,
-            text: 'Фильтры слоёв скрывают лишние узлы',
-          ),
-          const SizedBox(height: 26),
-          Row(
-            children: [
-              const Icon(
-                Icons.lock_outline_rounded,
-                size: 11,
-                color: AppColors.textMuted,
-              ),
-              const SizedBox(width: 5),
-              Expanded(
-                child: Text(
-                  'В промпт передаются только связи и аномалии, не исходный код.',
-                  style: textTheme.labelSmall?.copyWith(fontSize: 9),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _HintRow extends StatelessWidget {
-  const _HintRow({required this.icon, required this.text});
-
-  final IconData icon;
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Row(
-        children: [
-          Container(
-            width: 24,
-            height: 24,
-            decoration: BoxDecoration(
-              color: AppColors.surfaceRaised,
-              borderRadius: BorderRadius.circular(6),
+            style: textTheme.bodySmall?.copyWith(
+              color: AppColors.textPrimary.withValues(
+                alpha: 0.7,
+              ), // акцентный с прозрачностью
+              height: 1.5,
             ),
-            child: Icon(icon, size: 12, color: AppColors.textSecondary),
           ),
-          const SizedBox(width: 9),
-          Expanded(
-            child: Text(text, style: Theme.of(context).textTheme.labelSmall),
-          ),
+
+          // Всё, что ниже (подсказки и текст про промпт), удалено
         ],
       ),
     );
   }
 }
+
+// Класс _HintRow удален, так как он больше не используется
 
 class _FileInspector extends StatelessWidget {
   const _FileInspector({
@@ -398,9 +334,8 @@ class _NoNodeIssues extends StatelessWidget {
           Expanded(
             child: Text(
               'Для этого файла аномалий не найдено',
-              style: Theme.of(
-                context,
-              ).textTheme.labelSmall?.copyWith(color: AppColors.textSecondary),
+              style: Theme.of(context).textTheme.labelSmall
+                  ?.copyWith(color: AppColors.textSecondary),
             ),
           ),
         ],
@@ -476,10 +411,8 @@ class _NodeIssueCard extends StatelessWidget {
                     issue.description,
                     maxLines: resolved ? 2 : 3,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      height: 1.4,
-                      color: AppColors.textMuted,
-                    ),
+                    style: Theme.of(context).textTheme.labelSmall
+                        ?.copyWith(height: 1.4, color: AppColors.textMuted),
                   ),
                 ],
               ),
@@ -511,7 +444,6 @@ class _NodeIssueCard extends StatelessWidget {
   }
 }
 
-/// Разделитель, который явно отделяет связи и аномалии от оценки ИИ.
 class _AiDivider extends StatelessWidget {
   const _AiDivider();
 
@@ -746,9 +678,8 @@ class _LoadingBlock extends StatelessWidget {
             const SizedBox(width: 9),
             Text(
               'Модель анализирует узел…',
-              style: Theme.of(
-                context,
-              ).textTheme.titleSmall?.copyWith(color: AppColors.primary),
+              style: Theme.of(context).textTheme.titleSmall
+                  ?.copyWith(color: AppColors.primary),
             ),
           ],
         ),
@@ -797,10 +728,8 @@ class _ErrorBlock extends StatelessWidget {
             Expanded(
               child: Text(
                 message,
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: AppColors.danger,
-                  height: 1.4,
-                ),
+                style: Theme.of(context).textTheme.labelSmall
+                    ?.copyWith(color: AppColors.danger, height: 1.4),
               ),
             ),
           ],
@@ -809,9 +738,8 @@ class _ErrorBlock extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             details,
-            style: Theme.of(
-              context,
-            ).textTheme.labelSmall?.copyWith(fontSize: 9, height: 1.4),
+            style: Theme.of(context).textTheme.labelSmall
+                ?.copyWith(fontSize: 9, height: 1.4),
           ),
         ],
         const SizedBox(height: 12),

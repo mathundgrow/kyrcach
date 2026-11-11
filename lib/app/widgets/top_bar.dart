@@ -38,13 +38,15 @@ class TopBar extends StatelessWidget {
         return Container(
           height: 76,
           padding: const EdgeInsets.symmetric(horizontal: 18),
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [AppColors.surfaceAlt, AppColors.surface],
+              colors: [AppColors.background, AppColors.surfaceRaised],
             ),
-            border: Border(bottom: BorderSide(color: AppColors.border)),
+            border: const Border(
+              bottom: BorderSide(color: AppColors.borderStrong),
+            ),
           ),
           child: Stack(
             children: [

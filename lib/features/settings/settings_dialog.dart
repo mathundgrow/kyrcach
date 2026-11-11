@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'package:codegraph/core/theme/app_colors.dart';
 import 'package:codegraph/core/widgets/app_panel.dart';
 import 'package:codegraph/core/widgets/section_label.dart';
 import 'package:codegraph/features/inspector/inspector_controller.dart';
 import 'package:codegraph/features/settings/ai_settings.dart';
 import 'package:codegraph/features/settings/settings_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingsDialog extends StatefulWidget {
   const SettingsDialog({super.key});
@@ -125,7 +124,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
         constraints: const BoxConstraints(maxWidth: 580),
         child: AppPanel(
           padding: const EdgeInsets.all(24),
-          borderColor: AppColors.borderStrong,
+          borderColor: AppColors.bothEdge,
           radius: 20,
           gradient: AppColors.panelGradient,
           boxShadow: const [
@@ -143,15 +142,15 @@ class _SettingsDialogState extends State<SettingsDialog> {
                       width: 42,
                       height: 42,
                       decoration: BoxDecoration(
-                        color: AppColors.primary.withValues(alpha: 0.12),
+                        color: AppColors.bothEdge.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: AppColors.primary.withValues(alpha: 0.3),
+                          color: AppColors.bothEdge.withValues(alpha: 0.3),
                         ),
                       ),
                       child: const Icon(
                         Icons.tune_rounded,
-                        color: AppColors.primary,
+                        color: AppColors.bothEdge,
                         size: 20,
                       ),
                     ),
@@ -230,13 +229,28 @@ class _SettingsDialogState extends State<SettingsDialog> {
                     ),
                   ],
                 ),
-                Slider(
-                  value: _timeoutSeconds,
-                  min: 10,
-                  max: 120,
-                  divisions: 22,
-                  label: '${_timeoutSeconds.round()} с',
-                  onChanged: (value) => setState(() => _timeoutSeconds = value),
+                SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                    activeTrackColor: AppColors.bothEdge,
+                    thumbColor: AppColors.bothEdge,
+                    overlayColor: AppColors.bothEdge.withValues(alpha: 0.15),
+                    inactiveTrackColor: AppColors.bothEdge.withValues(
+                      alpha: 0.2,
+                    ),
+                    activeTickMarkColor: Colors.black.withValues(alpha: 0.3),
+                    inactiveTickMarkColor: AppColors.bothEdge.withValues(
+                      alpha: 0.3,
+                    ),
+                  ),
+                  child: Slider(
+                    value: _timeoutSeconds,
+                    min: 10,
+                    max: 120,
+                    divisions: 22,
+                    label: '${_timeoutSeconds.round()} с',
+                    onChanged: (value) =>
+                        setState(() => _timeoutSeconds = value),
+                  ),
                 ),
                 Text(
                   'Для небольших моделей достаточно 30–45 с. На слабом CPU '

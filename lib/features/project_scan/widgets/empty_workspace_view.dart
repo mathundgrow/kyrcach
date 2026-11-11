@@ -102,7 +102,6 @@ class _Hero extends StatelessWidget {
       children: [
         const SizedBox(height: 22),
         RichText(
-          textAlign: TextAlign.center,
           text: TextSpan(
             style: textTheme.displayLarge,
 
